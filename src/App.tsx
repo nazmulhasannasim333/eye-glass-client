@@ -1,7 +1,12 @@
+import MainLayout from "./components/layout/MainLayout";
+import ProtectedRoute from "./components/layout/ProtectedRoute";
+
 const App = () => {
   return (
     <div>
-      <h1>Start from app component</h1>
+      <ProtectedRoute>
+        <MainLayout />
+      </ProtectedRoute>
     </div>
   );
 };
