@@ -1,13 +1,17 @@
-import { useGetAllEyeGlassQuery } from "../../redux/features/eyeGlass/eyeGlassApi";
-import AddGlass from "../../pages/dashboard/AddGlass";
+import { Outlet } from "react-router-dom";
+import Sidebar from "./Sidebar";
 
 const MainLayout = () => {
-  const { data } = useGetAllEyeGlassQuery(undefined);
-  console.log(data);
   return (
     <div>
-      <h1 className="text-red-600">This is main layout</h1>
-      <AddGlass />
+      <div className="flex h-screen">
+        <Sidebar />
+        <div className="flex-1 p-5">
+          <h1 className="text-2xl font-bold mb-5">
+            <Outlet />
+          </h1>
+        </div>
+      </div>
     </div>
   );
 };
