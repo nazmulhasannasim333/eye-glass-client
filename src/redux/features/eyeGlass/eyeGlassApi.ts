@@ -8,7 +8,14 @@ const eyeGlassApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    addEyeGlass: builder.mutation({
+      query: (productData) => ({
+        url: "/products/add-product",
+        method: "POST",
+        body: productData,
+      }),
+    }),
   }),
 });
 
-export const { useGetAllEyeGlassQuery } = eyeGlassApi;
+export const { useGetAllEyeGlassQuery, useAddEyeGlassMutation } = eyeGlassApi;

@@ -1,5 +1,5 @@
-import { Button } from "@material-tailwind/react";
 import { useGetAllEyeGlassQuery } from "../../redux/features/eyeGlass/eyeGlassApi";
+import AddGlass from "../../pages/dashboard/AddGlass";
 
 const MainLayout = () => {
   const { data } = useGetAllEyeGlassQuery(undefined);
@@ -7,9 +7,7 @@ const MainLayout = () => {
   return (
     <div>
       <h1 className="text-red-600">This is main layout</h1>
-      <Button placeholder={""} variant="gradient">
-        gradient
-      </Button>
+      <AddGlass />
     </div>
   );
 };
