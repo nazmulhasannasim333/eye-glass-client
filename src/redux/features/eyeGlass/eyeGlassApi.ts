@@ -48,18 +48,16 @@ const eyeGlassApi = baseApi.injectEndpoints({
           url: `/products/get-all-products`,
           method: "GET",
           params: params,
-          // params: {
-          //   frameMaterial: query.material,
-          //   frameShape: query.shape,
-          //   lensType: query.lens,
-          //   brand: query.brand,
-          //   gender: query.gender,
-          //   color: query.color,
-          //   minPrice: query.minPrice,
-          //   maxPrice: query.maxPrice,
-          // },
         };
       },
+      providesTags: ["all-glasses"],
+    }),
+    getEyeGlass: builder.query({
+      query: (id: string) => ({
+        url: `/products/get-single-product/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["all-glasses"],
     }),
     addEyeGlass: builder.mutation({
       query: (productData) => ({
@@ -67,8 +65,45 @@ const eyeGlassApi = baseApi.injectEndpoints({
         method: "POST",
         body: productData,
       }),
+      invalidatesTags: ["all-glasses"],
+    }),
+    updateEyeGlass: builder.mutation({
+      query: ({ productData, id }) => {
+        return {
+          url: `/products/update-product/${id}`,
+          method: "PUT",
+          body: productData,
+        };
+      },
+      invalidatesTags: ["all-glasses"],
+    }),
+    deleteEyeGlass: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/products/delete-product/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["all-glasses"],
+    }),
+    sellEyeGlass: builder.mutation({
+      query: (sellData) => {
+        return {
+          url: `/sales/create-sales`,
+          method: "POST",
+          body: sellData,
+        };
+      },
+      invalidatesTags: ["all-glasses"],
     }),
   }),
 });
 
-export const { useGetAllEyeGlassQuery, useAddEyeGlassMutation } = eyeGlassApi;
+export const {
+  useGetAllEyeGlassQuery,
+  useAddEyeGlassMutation,
+  useGetEyeGlassQuery,
+  useUpdateEyeGlassMutation,
+  useDeleteEyeGlassMutation,
+  useSellEyeGlassMutation,
+} = eyeGlassApi;

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { toast } from "sonner";
 import { logout } from "../../redux/features/auth/authSlice";
@@ -14,27 +14,36 @@ const Sidebar = () => {
   return (
     <div className="bg-gray-800 text-white w-64 flex flex-col justify-between h-screen ">
       <div className="p-4">
-        <h2 className="text-xl font-bold mb-4 text-orange-600">
-          EyeGlass Company
-        </h2>
+        <h2 className="text-xl font-bold mb-4 text-orange-600">EyeGlass</h2>
         <ul className="space-y-2">
-          <Link to="/add-product">
+          <NavLink
+            className={({ isActive }) => (isActive ? "bg-deep-orange-400" : "")}
+            to="/add-product"
+          >
             <li className="py-2 px-4 hover:bg-gray-700 rounded-md cursor-pointer">
               Add Glass
             </li>
-          </Link>
+          </NavLink>
           <div className="pb-3">
-            <Link to="/all-products">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "bg-deep-orange-400" : ""
+              }
+              to="/all-products"
+            >
               <li className="py-2 px-4 hover:bg-gray-700 rounded-md cursor-pointer">
                 Eye Glasses
               </li>
-            </Link>
+            </NavLink>
           </div>
-          <Link to="/sales-history">
+          <NavLink
+            className={({ isActive }) => (isActive ? "bg-deep-orange-400" : "")}
+            to="/sales-history"
+          >
             <li className="py-2 px-4 hover:bg-gray-700 rounded-md cursor-pointer">
               Sales History
             </li>
-          </Link>
+          </NavLink>
         </ul>
       </div>
       <div className="p-4 bg-gray-900">

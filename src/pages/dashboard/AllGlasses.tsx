@@ -4,39 +4,13 @@ import {
   CardHeader,
   Input,
   Typography,
-  Button,
   CardBody,
+  Button,
   Tooltip,
 } from "@material-tailwind/react";
 import { useGetAllEyeGlassQuery } from "../../redux/features/eyeGlass/eyeGlassApi";
 import { useState } from "react";
-
-type TEyeGlass = {
-  _id: string;
-  productName: string;
-  productPrice: number;
-  productQuantity: number;
-  productImage: string;
-  lensType: string;
-  gender: string;
-  frameShape: string;
-  frameMaterial: string;
-  color: string;
-  brand: string;
-};
-
-const TABLE_HEAD = [
-  "Product",
-  "Price",
-  "Quantity",
-  "Brand",
-  "Lens",
-  "Gender",
-  "Material",
-  "Edit",
-  "Delete",
-  "Sale",
-];
+import ProductCard from "./ProductCard";
 
 const AllGlasses = () => {
   const [material, setMaterial] = useState("");
@@ -48,6 +22,8 @@ const AllGlasses = () => {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [productsId, setProductsId] = useState([]);
+  console.log(productsId);
   const query = {
     material,
     shape,
@@ -60,8 +36,29 @@ const AllGlasses = () => {
     searchTerm,
   };
   const { data: eyeGlasses } = useGetAllEyeGlassQuery(query);
-  console.log(eyeGlasses);
-  console.log(searchTerm);
+
+  const TABLE_HEAD = [
+    <Tooltip content="Delete Glass">
+      <Button
+        placeholder={""}
+        variant="gradient"
+        color="red"
+        className="py-2 px-3"
+      >
+        Delete All
+      </Button>
+    </Tooltip>,
+    "Product Name",
+    "Price",
+    "Quantity",
+    "Brand",
+    "Lens",
+    "Material",
+    "Edit & Duplicate",
+    "Update",
+    "Delete",
+    "Sale",
+  ];
 
   return (
     <Card placeholder={""} className="h-full w-full">
@@ -190,9 +187,9 @@ const AllGlasses = () => {
         <table className="mt-4 w-full min-w-max table-auto text-left">
           <thead>
             <tr>
-              {TABLE_HEAD.map((head) => (
+              {TABLE_HEAD.map((head, index) => (
                 <th
-                  key={head}
+                  key={index}
                   className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
                 >
                   <Typography
@@ -207,150 +204,7 @@ const AllGlasses = () => {
               ))}
             </tr>
           </thead>
-          <tbody>
-            {eyeGlasses?.data?.map(
-              (
-                {
-                  _id,
-                  productName,
-                  productPrice,
-                  productQuantity,
-                  productImage,
-                  lensType,
-                  gender,
-                  frameMaterial,
-                  brand,
-                }: TEyeGlass,
-                index: number
-              ) => {
-                const isLast = index === eyeGlasses?.data?.length - 1;
-                const classes = isLast
-                  ? "p-4"
-                  : "p-4 border-b border-blue-gray-50";
-
-                return (
-                  <tr key={_id}>
-                    <td className={classes}>
-                      <div className="flex items-center gap-3">
-                        <img
-                          className="h-20 w-28 rounded-lg object-cover object-center"
-                          src={productImage}
-                          alt={productImage}
-                        />
-                        <div className="flex flex-col">
-                          <Typography
-                            placeholder={""}
-                            color="blue-gray"
-                            className="font-normal text-lg"
-                          >
-                            {productName}
-                          </Typography>
-                        </div>
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      <div className="flex flex-col">
-                        <Typography
-                          placeholder={""}
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          ${productPrice}
-                        </Typography>
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      <Typography
-                        placeholder={""}
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {productQuantity}
-                      </Typography>
-                    </td>
-                    <td className={classes}>
-                      <Typography
-                        placeholder={""}
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {brand}
-                      </Typography>
-                    </td>
-                    <td className={classes}>
-                      <Typography
-                        placeholder={""}
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {lensType}
-                      </Typography>
-                    </td>
-                    <td className={classes}>
-                      <Typography
-                        placeholder={""}
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {gender}
-                      </Typography>
-                    </td>
-                    <td className={classes}>
-                      <Typography
-                        placeholder={""}
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {frameMaterial}
-                      </Typography>
-                    </td>
-                    <td className={classes}>
-                      <Tooltip content="Edit & Duplicate">
-                        <Button
-                          placeholder={""}
-                          variant="outlined"
-                          size="sm"
-                          color="blue"
-                        >
-                          Edit & Duplicate
-                        </Button>
-                      </Tooltip>
-                    </td>
-                    <td className={classes}>
-                      <Tooltip content="Delete Glass">
-                        <Button
-                          placeholder={""}
-                          variant="gradient"
-                          size="sm"
-                          color="red"
-                        >
-                          Delete
-                        </Button>
-                      </Tooltip>
-                    </td>
-                    <td className={classes}>
-                      <Tooltip content="Sell Glass">
-                        <Button
-                          placeholder={""}
-                          variant="filled"
-                          size="sm"
-                          color="orange"
-                        >
-                          Sell
-                        </Button>
-                      </Tooltip>
-                    </td>
-                  </tr>
-                );
-              }
-            )}
-          </tbody>
+          <ProductCard eyeGlasses={eyeGlasses} setProductsId={setProductsId} />
         </table>
       </CardBody>
     </Card>
