@@ -7,8 +7,13 @@ import {
   CardBody,
   Button,
   Tooltip,
+  Spinner,
+  CardFooter,
 } from "@material-tailwind/react";
-import { useGetAllEyeGlassQuery } from "../../redux/features/eyeGlass/eyeGlassApi";
+import {
+  useDeleteManyEyeGlassMutation,
+  useGetAllEyeGlassQuery,
+} from "../../redux/features/eyeGlass/eyeGlassApi";
 import { useState } from "react";
 import ProductCard from "./ProductCard";
 
@@ -22,8 +27,8 @@ const AllGlasses = () => {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [productsId, setProductsId] = useState([]);
-  console.log(productsId);
+  const [productsId, setProductsId] = useState<string[]>([]);
+  const [deletedAll] = useDeleteManyEyeGlassMutation();
   const query = {
     material,
     shape,
@@ -35,7 +40,26 @@ const AllGlasses = () => {
     maxPrice,
     searchTerm,
   };
-  const { data: eyeGlasses } = useGetAllEyeGlassQuery(query);
+  const { data: eyeGlasses, isLoading } = useGetAllEyeGlassQuery(query);
+
+  const handleCheckboxClick = (id: string) => {
+    if (productsId) {
+      const index = productsId.indexOf(id);
+
+      if (index === -1) {
+        setProductsId([...productsId, id]);
+      } else {
+        const newProductsId = [...productsId];
+        newProductsId.splice(index, 1);
+        setProductsId(newProductsId);
+      }
+    }
+  };
+
+  const handleDeleteMany = async () => {
+    const res = await deletedAll(productsId);
+    console.log(res);
+  };
 
   const TABLE_HEAD = [
     <Tooltip content="Delete Glass">
@@ -44,6 +68,7 @@ const AllGlasses = () => {
         variant="gradient"
         color="red"
         className="py-2 px-3"
+        onClick={handleDeleteMany}
       >
         Delete All
       </Button>
@@ -57,8 +82,16 @@ const AllGlasses = () => {
     "Edit & Duplicate",
     "Update",
     "Delete",
-    "Sale",
+    "Sell",
   ];
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center w-full h-full">
+        <Spinner color="blue" />
+      </div>
+    );
+  }
 
   return (
     <Card placeholder={""} className="h-full w-full">
@@ -183,7 +216,7 @@ const AllGlasses = () => {
           </div>
         </div>
       </CardHeader>
-      <CardBody placeholder={""} className="overflow-scroll px-0 ">
+      <CardBody placeholder={""} className=" px-0 ">
         <table className="mt-4 w-full min-w-max table-auto text-left">
           <thead>
             <tr>
@@ -204,9 +237,33 @@ const AllGlasses = () => {
               ))}
             </tr>
           </thead>
-          <ProductCard eyeGlasses={eyeGlasses} setProductsId={setProductsId} />
+          <ProductCard
+            eyeGlasses={eyeGlasses}
+            handleCheckboxClick={handleCheckboxClick}
+          />
         </table>
       </CardBody>
+      <CardFooter
+        placeholder={""}
+        className="flex items-center justify-between border-t border-blue-gray-50 p-4"
+      >
+        <Typography
+          placeholder={""}
+          variant="small"
+          color="blue-gray"
+          className="font-normal"
+        >
+          Page 1 of 10
+        </Typography>
+        <div className="flex gap-2">
+          <Button placeholder={""} variant="outlined" size="sm">
+            Previous
+          </Button>
+          <Button placeholder={""} variant="outlined" size="sm">
+            Next
+          </Button>
+        </div>
+      </CardFooter>
     </Card>
   );
 };

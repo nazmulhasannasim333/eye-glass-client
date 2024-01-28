@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AddGlass from "../pages/dashboard/AddGlass";
 import AllGlasses from "../pages/dashboard/AllGlasses";
+import SalesHistory from "../pages/dashboard/SalesHistory";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "all-products",
         element: <AllGlasses />,
+      },
+      {
+        path: "sales-history",
+        element: <SalesHistory />,
       },
     ],
   },

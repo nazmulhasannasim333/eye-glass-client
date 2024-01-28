@@ -25,15 +25,16 @@ type TEyeGlass = {
   brand: string;
 };
 
-type TGlassProps = {
+type Tprops = {
   eyeGlasses: {
     data: TEyeGlass[];
   };
 };
 
-const ProductCard = ({ eyeGlasses }: TGlassProps, setProductsId: any) => {
+const ProductCard: React.FC<
+  Tprops & { handleCheckboxClick: (id: string) => void }
+> = ({ eyeGlasses, handleCheckboxClick }) => {
   const [deleteGlass] = useDeleteEyeGlassMutation();
-  console.log(setProductsId);
 
   const handleDelete = (id: string) => {
     Swal.fire({
@@ -79,7 +80,7 @@ const ProductCard = ({ eyeGlasses }: TGlassProps, setProductsId: any) => {
             <tr key={_id}>
               <td className={classes}>
                 <Checkbox
-                  onClick={() => setProductsId(_id)}
+                  onClick={() => handleCheckboxClick(_id)}
                   className="py-2 px-2"
                   crossOrigin={""}
                   label=""

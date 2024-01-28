@@ -86,6 +86,17 @@ const eyeGlassApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["all-glasses"],
     }),
+    deleteManyEyeGlass: builder.mutation({
+      query: (ids) => {
+        console.log(ids);
+        return {
+          url: `/products/delete-products`,
+          method: "DELETE",
+          body: ids,
+        };
+      },
+      invalidatesTags: ["all-glasses"],
+    }),
     sellEyeGlass: builder.mutation({
       query: (sellData) => {
         return {
@@ -106,4 +117,5 @@ export const {
   useUpdateEyeGlassMutation,
   useDeleteEyeGlassMutation,
   useSellEyeGlassMutation,
+  useDeleteManyEyeGlassMutation,
 } = eyeGlassApi;
