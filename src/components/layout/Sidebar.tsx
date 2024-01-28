@@ -12,7 +12,7 @@ const Sidebar = () => {
     toast.success("Logged out", { id: toastId, duration: 2000 });
   };
   return (
-    <div className="bg-gray-800 text-white w-64 flex flex-col justify-between">
+    <div className="bg-gray-800 text-white w-64 flex flex-col justify-between h-screen ">
       <div className="p-4">
         <h2 className="text-xl font-bold mb-4 text-orange-600">
           EyeGlass Company
