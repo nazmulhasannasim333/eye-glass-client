@@ -13,6 +13,8 @@ const eyeGlassApi = baseApi.injectEndpoints({
         minPrice,
         maxPrice,
         searchTerm,
+        page,
+        limit,
       }) => {
         const params = new URLSearchParams();
         if (material) {
@@ -42,6 +44,12 @@ const eyeGlassApi = baseApi.injectEndpoints({
 
         if (searchTerm) {
           params.append("searchTerm", searchTerm);
+        }
+        if (page) {
+          params.append("page", page);
+        }
+        if (limit) {
+          params.append("limit", limit);
         }
 
         return {

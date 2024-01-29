@@ -20,11 +20,19 @@ const SalesModal = ({ id }: { id: string }) => {
 
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Please wait...");
+
     try {
       const productQuantity = Number(data.quantity);
       const { productId, buyerName } = data;
       const sellData = { productId, buyerName, quantity: productQuantity };
+      if (!buyerName || !productQuantity) {
+        toast.error("Please provide input value", {
+          id: toastId,
+          duration: 2000,
+        });
+      }
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const res: any = await sellProduct(sellData);
       console.log(res);
       if (res?.error?.data) {
@@ -65,9 +73,30 @@ const SalesModal = ({ id }: { id: string }) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Card placeholder={""} className="mx-auto w-full max-w-[24rem]">
             <CardBody placeholder={""} className="flex flex-col gap-4">
-              <Typography placeholder={""} variant="h4" color="blue-gray">
-                Sell The Glass
-              </Typography>
+              <div className="flex justify-between items-center">
+                <Typography placeholder={""} variant="h4" color="blue-gray">
+                  Sell The Glass
+                </Typography>
+                <div
+                  onClick={handleOpen}
+                  className="me-4 cursor-pointer border-2 border-red-400 p-1"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18 18 6M6 6l12 12"
+                    />
+                  </svg>
+                </div>
+              </div>
 
               <Typography placeholder={""} className="-mb-2" variant="h6">
                 Quantity

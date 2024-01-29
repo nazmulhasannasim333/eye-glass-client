@@ -28,7 +28,9 @@ const AllGlasses = () => {
   const [maxPrice, setMaxPrice] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [productsId, setProductsId] = useState<string[]>([]);
+  const [page, setPage] = useState(1);
   const [deletedAll] = useDeleteManyEyeGlassMutation();
+
   const query = {
     material,
     shape,
@@ -39,8 +41,11 @@ const AllGlasses = () => {
     minPrice,
     maxPrice,
     searchTerm,
+    page,
+    limit: 5,
   };
   const { data: eyeGlasses, isLoading } = useGetAllEyeGlassQuery(query);
+  console.log(eyeGlasses?.data?.length);
 
   const handleCheckboxClick = (id: string) => {
     if (productsId) {
@@ -279,13 +284,13 @@ const AllGlasses = () => {
           </div>
           <div className="flex gap-2">
             <input
-              onBlur={(e) => setMinPrice(e.target.value)}
+              onChange={(e) => setMinPrice(e.target.value)}
               type="number"
               className="border border-gray-400 hover:border-gray-500 px-2 py-2 rounded focus:outline-none focus:shadow-outline w-20 text-sm"
               placeholder="Min"
             />
             <input
-              onBlur={(e) => setMaxPrice(e.target.value)}
+              onChange={(e) => setMaxPrice(e.target.value)}
               type="number"
               className="border border-gray-400 hover:border-gray-500 px-2 py-2 rounded focus:outline-none focus:shadow-outline w-20 text-sm"
               placeholder="Max"
@@ -345,13 +350,25 @@ const AllGlasses = () => {
           color="blue-gray"
           className="font-normal"
         >
-          Page 1 of 10
+          {`Page ${page} `}
         </Typography>
         <div className="flex gap-2">
-          <Button placeholder={""} variant="outlined" size="sm">
+          <Button
+            onClick={() => setPage(page - 1)}
+            placeholder={""}
+            variant="outlined"
+            size="sm"
+            disabled={page === 1}
+          >
             Previous
           </Button>
-          <Button placeholder={""} variant="outlined" size="sm">
+          <Button
+            onClick={() => setPage(page + 1)}
+            placeholder={""}
+            variant="outlined"
+            size="sm"
+            disabled={eyeGlasses?.data?.length < 5}
+          >
             Next
           </Button>
         </div>

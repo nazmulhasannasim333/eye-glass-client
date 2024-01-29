@@ -36,7 +36,7 @@ const ProductCard: React.FC<
 > = ({ eyeGlasses, handleCheckboxClick }) => {
   const [deleteGlass] = useDeleteEyeGlassMutation();
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -45,9 +45,9 @@ const ProductCard: React.FC<
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        deleteGlass(id);
+        await deleteGlass(id);
         Swal.fire({
           title: "Deleted!",
           text: "Glass has been deleted.",
