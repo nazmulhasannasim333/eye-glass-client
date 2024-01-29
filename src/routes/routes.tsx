@@ -16,7 +16,7 @@ const router = createBrowserRouter([
         element: <AddGlass />,
       },
       {
-        path: "",
+        path: "all-products",
         element: <AllGlasses />,
       },
       {
