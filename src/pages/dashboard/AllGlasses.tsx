@@ -45,7 +45,6 @@ const AllGlasses = () => {
     limit: 5,
   };
   const { data: eyeGlasses, isLoading } = useGetAllEyeGlassQuery(query);
-  console.log(eyeGlasses?.data?.length);
 
   const handleCheckboxClick = (id: string) => {
     if (productsId) {
