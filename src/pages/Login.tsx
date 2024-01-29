@@ -7,12 +7,7 @@ import { TUser, setUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      email: "mdnasimhosen333@gmail.com",
-      password: "123456",
-    },
-  });
+  const { register, handleSubmit } = useForm({});
   const navigate = useNavigate();
   const [userLogin] = useLoginMutation();
   const dispatch = useAppDispatch();
