@@ -1,7 +1,16 @@
-import { Link, NavLink } from "react-router-dom";
+// import { Link, NavLink } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { toast } from "sonner";
 import { logout } from "../../redux/features/auth/authSlice";
+import {
+  Card,
+  Typography,
+  List,
+  ListItem,
+  ListItemPrefix,
+} from "@material-tailwind/react";
+import { PowerIcon } from "@heroicons/react/24/solid";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();
@@ -12,46 +21,63 @@ const Sidebar = () => {
     toast.success("Logged out", { id: toastId, duration: 2000 });
   };
   return (
-    <div className="bg-gray-800 text-white w-64 flex flex-col justify-between h-screen ">
-      <div className="p-4">
-        <h2 className="text-xl font-bold mb-4 text-orange-600">EyeGlass</h2>
-        <ul className="space-y-2">
+    <Card
+      placeholder={""}
+      className="h-screen w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5"
+    >
+      <div className="mb-2 p-4">
+        <Typography placeholder={""} variant="h5" color="purple">
+          EyeGlass Inventory
+        </Typography>
+      </div>
+      <List placeholder={""}>
+        <ListItem placeholder={""}>
           <NavLink
-            className={({ isActive }) => (isActive ? "bg-deep-orange-400" : "")}
+            className={({ isActive }: { isActive: boolean }) =>
+              isActive
+                ? "flex items-center w-full p-3 bg-indigo-400  text-white font-semibold bg-opacity-80  rounded-lg text-start leading-tight transition-all outline-none"
+                : "p-3"
+            }
             to="/add-product"
           >
-            <li className="py-2 px-4 hover:bg-gray-700 rounded-md cursor-pointer">
-              Add Glass
-            </li>
+            Add Glass
           </NavLink>
-          <div className="pb-3">
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "bg-deep-orange-400" : ""
-              }
-              to="/all-products"
-            >
-              <li className="py-2 px-4 hover:bg-gray-700 rounded-md cursor-pointer">
-                Eye Glasses
-              </li>
-            </NavLink>
-          </div>
+        </ListItem>
+        <ListItem placeholder={""}>
+          {" "}
           <NavLink
-            className={({ isActive }) => (isActive ? "bg-deep-orange-400" : "")}
+            className={({ isActive }: { isActive: boolean }) =>
+              isActive
+                ? "flex items-center w-full p-3 bg-indigo-400  text-white font-semibold bg-opacity-80  rounded-lg text-start leading-tight transition-all outline-none"
+                : "p-3"
+            }
+            to="/all-products"
+          >
+            All Glasses
+          </NavLink>
+        </ListItem>
+        <ListItem className="" placeholder={""}>
+          {" "}
+          <NavLink
+            className={({ isActive }: { isActive: boolean }) =>
+              isActive
+                ? "flex items-center w-full p-3 bg-indigo-400  text-white font-semibold bg-opacity-80  rounded-lg text-start leading-tight transition-all outline-none"
+                : "p-3"
+            }
             to="/sales-history"
           >
-            <li className="py-2 px-4 hover:bg-gray-700 rounded-md cursor-pointer">
-              Sales History
-            </li>
+            Sales History
           </NavLink>
-        </ul>
-      </div>
-      <div className="p-4 bg-gray-900">
-        <Link onClick={handleLogout} to="/login">
-          <p className="text-xl py-1 px-1 hover:bg-gray-700">Logout</p>
-        </Link>
-      </div>
-    </div>
+        </ListItem>
+        <div className="w-full h-1 bg-blue-gray-200"></div>
+        <ListItem onClick={handleLogout} className="mt-10" placeholder={""}>
+          <ListItemPrefix placeholder={""}>
+            <PowerIcon className="h-5 w-5" />
+          </ListItemPrefix>
+          Log Out
+        </ListItem>
+      </List>
+    </Card>
   );
 };
 

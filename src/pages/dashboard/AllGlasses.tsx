@@ -7,7 +7,6 @@ import {
   CardBody,
   Button,
   Tooltip,
-  Spinner,
   CardFooter,
 } from "@material-tailwind/react";
 import {
@@ -16,6 +15,7 @@ import {
 } from "../../redux/features/eyeGlass/eyeGlassApi";
 import { useState } from "react";
 import ProductCard from "./ProductCard";
+import Swal from "sweetalert2";
 
 const AllGlasses = () => {
   const [material, setMaterial] = useState("");
@@ -57,8 +57,24 @@ const AllGlasses = () => {
   };
 
   const handleDeleteMany = async () => {
-    const res = await deletedAll(productsId);
-    console.log(res);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await deletedAll(productsId);
+        Swal.fire({
+          title: "Deleted!",
+          text: "Glass has been deleted.",
+          icon: "success",
+        });
+      }
+    });
   };
 
   const TABLE_HEAD = [
@@ -69,6 +85,7 @@ const AllGlasses = () => {
         color="red"
         className="py-2 px-3"
         onClick={handleDeleteMany}
+        disabled={!productsId[0]}
       >
         Delete All
       </Button>
@@ -87,8 +104,83 @@ const AllGlasses = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center w-full h-full">
-        <Spinner color="blue" />
+      <div>
+        <div className="mt-10">
+          <div className="max-w-full animate-pulse">
+            <div className="block w-full h-2 mb-2 font-sans text-5xl antialiased font-semibold leading-tight tracking-normal bg-gray-300 rounded-full text-inherit">
+              &nbsp;
+            </div>
+            <div className="block w-full h-2 mb-2 font-sans text-5xl antialiased font-semibold leading-tight tracking-normal bg-gray-300 rounded-full text-inherit">
+              &nbsp;
+            </div>
+            <div className="block w-full h-2 mb-2 font-sans text-5xl antialiased font-semibold leading-tight tracking-normal bg-gray-300 rounded-full text-inherit">
+              &nbsp;
+            </div>
+            <div className="block w-full h-2 mb-2 font-sans text-5xl antialiased font-semibold leading-tight tracking-normal bg-gray-300 rounded-full text-inherit">
+              &nbsp;
+            </div>
+          </div>
+        </div>
+        <div className="mt-40 mx-0">
+          <div className="max-w-full animate-pulse">
+            <div className="block w-full h-3 mb-2 font-sans text-5xl antialiased font-semibold leading-tight tracking-normal bg-gray-300 rounded-full text-inherit">
+              &nbsp;
+            </div>
+            <div className="block w-full h-3 mb-2 font-sans text-5xl antialiased font-semibold leading-tight tracking-normal bg-gray-300 rounded-full text-inherit">
+              &nbsp;
+            </div>
+            <div className="block w-full h-3 mb-7 font-sans text-5xl antialiased font-semibold leading-tight tracking-normal bg-gray-300 rounded-full text-inherit">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

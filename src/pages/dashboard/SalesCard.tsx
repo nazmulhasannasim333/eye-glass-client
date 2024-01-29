@@ -49,7 +49,9 @@ const SalesCard = ({ sales }: Tprops) => {
                       color="blue-gray"
                       className="font-normal text-[12px]"
                     >
-                      {productId?.productName || "Sold Out"}
+                      {productId?.productName || (
+                        <p className="text-red-300">"Sold Out"</p>
+                      )}
                     </Typography>
                   </div>
                 </div>
@@ -62,7 +64,7 @@ const SalesCard = ({ sales }: Tprops) => {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {buyerName || "Not Found"}
+                    {buyerName || <p className="text-red-300">Not Found</p>}
                   </Typography>
                 </div>
               </td>
@@ -73,7 +75,9 @@ const SalesCard = ({ sales }: Tprops) => {
                   color="blue-gray"
                   className="font-normal"
                 >
-                  {productId?.productQuantity || "Not Found"}
+                  {productId?.productQuantity || (
+                    <p className="text-red-300">Not Found</p>
+                  )}
                 </Typography>
               </td>
               <td className={classes}>
@@ -83,7 +87,9 @@ const SalesCard = ({ sales }: Tprops) => {
                   color="blue-gray"
                   className="font-normal"
                 >
-                  {productId?.brand || "Not Found"}
+                  {productId?.brand || (
+                    <p className="text-red-300">Not Found</p>
+                  )}
                 </Typography>
               </td>
               <td className={classes}>
@@ -93,7 +99,9 @@ const SalesCard = ({ sales }: Tprops) => {
                   color="blue-gray"
                   className="font-normal"
                 >
-                  {productId?.lensType || "Not Found"}
+                  {productId?.lensType || (
+                    <p className="text-red-300">Not Found</p>
+                  )}
                 </Typography>
               </td>
               <td className={classes}>
@@ -103,7 +111,9 @@ const SalesCard = ({ sales }: Tprops) => {
                   color="blue-gray"
                   className="font-normal"
                 >
-                  {productId?.color || "Not Found"}
+                  {productId?.color || (
+                    <p className="text-red-300">Not Found</p>
+                  )}
                 </Typography>
               </td>
               <td className={classes}>
@@ -113,7 +123,7 @@ const SalesCard = ({ sales }: Tprops) => {
                   color="blue-gray"
                   className="font-normal"
                 >
-                  {quantity || "Not Found"}
+                  {quantity || <p className="text-red-300">Not Found</p>}
                 </Typography>
               </td>
             </tr>

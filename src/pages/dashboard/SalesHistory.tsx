@@ -3,7 +3,6 @@ import {
   CardHeader,
   Typography,
   CardBody,
-  Spinner,
 } from "@material-tailwind/react";
 import SalesCard from "./SalesCard";
 import { useGetAllSalesQuery } from "../../redux/features/sales/salesApi";
@@ -24,8 +23,83 @@ const SalesHistory = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center w-full h-full">
-        <Spinner color="blue" />
+      <div>
+        <div className="mt-10">
+          <div className="max-w-full animate-pulse">
+            <div className="block w-full h-2 mb-2 font-sans text-5xl antialiased font-semibold leading-tight tracking-normal bg-gray-300 rounded-full text-inherit">
+              &nbsp;
+            </div>
+            <div className="block w-full h-2 mb-2 font-sans text-5xl antialiased font-semibold leading-tight tracking-normal bg-gray-300 rounded-full text-inherit">
+              &nbsp;
+            </div>
+            <div className="block w-full h-2 mb-2 font-sans text-5xl antialiased font-semibold leading-tight tracking-normal bg-gray-300 rounded-full text-inherit">
+              &nbsp;
+            </div>
+            <div className="block w-full h-2 mb-2 font-sans text-5xl antialiased font-semibold leading-tight tracking-normal bg-gray-300 rounded-full text-inherit">
+              &nbsp;
+            </div>
+          </div>
+        </div>
+        <div className="mt-40 mx-0">
+          <div className="max-w-full animate-pulse">
+            <div className="block w-full h-3 mb-2 font-sans text-5xl antialiased font-semibold leading-tight tracking-normal bg-gray-300 rounded-full text-inherit">
+              &nbsp;
+            </div>
+            <div className="block w-full h-3 mb-2 font-sans text-5xl antialiased font-semibold leading-tight tracking-normal bg-gray-300 rounded-full text-inherit">
+              &nbsp;
+            </div>
+            <div className="block w-full h-3 mb-7 font-sans text-5xl antialiased font-semibold leading-tight tracking-normal bg-gray-300 rounded-full text-inherit">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+
+            <div className="block h-3 mb-2 font-sans text-base antialiased font-light leading-relaxed bg-gray-300 rounded-full text-inherit w-full">
+              &nbsp;
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -42,7 +116,7 @@ const SalesHistory = () => {
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div>
             <Typography placeholder={""} variant="h4" color="blue-gray">
-              All Glasses
+              Sales History
             </Typography>
           </div>
           <div>
