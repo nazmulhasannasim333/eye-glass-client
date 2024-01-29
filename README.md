@@ -5,7 +5,7 @@
 Project Name:
 Eye Glass Inventory
 
-<p align="center">Project Live Link : https://jovial-cobbler-980c74.netlify.app/ <p />
+<p align="center">Project Live Link : https://eye-glass-inventory.vercel.app <p />
 
 #### Features
 
