@@ -7,7 +7,12 @@ import { TUser, setUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm({});
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      email: "mdnasimhosen333@gmail.com",
+      password: "123456",
+    },
+  });
   const navigate = useNavigate();
   const [userLogin] = useLoginMutation();
   const dispatch = useAppDispatch();
@@ -20,6 +25,7 @@ const Login = () => {
       password: data.password,
     };
     const res = await userLogin(userInfo).unwrap();
+    console.log(res);
     const user = verifyToken(res.data.accessToken) as TUser;
     dispatch(setUser({ user, token: res.data.accessToken }));
     toast.success("Logged in", { id: toastId, duration: 2000 });

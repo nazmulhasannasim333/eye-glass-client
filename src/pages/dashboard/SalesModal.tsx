@@ -11,12 +11,15 @@ import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useSellEyeGlassMutation } from "../../redux/features/eyeGlass/eyeGlassApi";
 import { toast } from "sonner";
+import { useAppSelector } from "../../redux/hooks";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 
 const SalesModal = ({ id }: { id: string }) => {
   const [open, setOpen] = useState(false);
   const { register, handleSubmit } = useForm();
   const handleOpen = () => setOpen(!open);
   const [sellProduct] = useSellEyeGlassMutation();
+  const user = useAppSelector(selectCurrentUser);
 
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Please wait...");
@@ -24,7 +27,12 @@ const SalesModal = ({ id }: { id: string }) => {
     try {
       const productQuantity = Number(data.quantity);
       const { productId, buyerName } = data;
-      const sellData = { productId, buyerName, quantity: productQuantity };
+      const sellData = {
+        productId,
+        buyerName,
+        quantity: productQuantity,
+        userEmail: user?.email,
+      };
       if (!buyerName || !productQuantity) {
         toast.error("Please provide input value", {
           id: toastId,

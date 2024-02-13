@@ -15,6 +15,8 @@ const eyeGlassApi = baseApi.injectEndpoints({
         searchTerm,
         page,
         limit,
+        email,
+        role,
       }) => {
         const params = new URLSearchParams();
         if (material) {
@@ -53,7 +55,7 @@ const eyeGlassApi = baseApi.injectEndpoints({
         }
 
         return {
-          url: `/products/get-all-products`,
+          url: `/products/get-all-products/${email}/${role}`,
           method: "GET",
           params: params,
         };

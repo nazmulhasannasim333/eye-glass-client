@@ -16,6 +16,8 @@ import {
 import { useState } from "react";
 import ProductCard from "./ProductCard";
 import Swal from "sweetalert2";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
+import { useAppSelector } from "../../redux/hooks";
 
 const AllGlasses = () => {
   const [material, setMaterial] = useState("");
@@ -30,6 +32,7 @@ const AllGlasses = () => {
   const [productsId, setProductsId] = useState<string[]>([]);
   const [page, setPage] = useState(1);
   const [deletedAll] = useDeleteManyEyeGlassMutation();
+  const user = useAppSelector(selectCurrentUser);
 
   const query = {
     material,
@@ -43,6 +46,8 @@ const AllGlasses = () => {
     searchTerm,
     page,
     limit: 5,
+    email: user?.email,
+    role: user?.role,
   };
   const { data: eyeGlasses, isLoading } = useGetAllEyeGlassQuery(query);
 

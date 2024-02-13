@@ -7,10 +7,18 @@ import {
 import SalesCard from "./SalesCard";
 import { useGetAllSalesQuery } from "../../redux/features/sales/salesApi";
 import { useState } from "react";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
+import { useAppSelector } from "../../redux/hooks";
 
 const SalesHistory = () => {
   const [filter, setFilter] = useState("");
-  const { data: sales, isLoading } = useGetAllSalesQuery(filter);
+  const user = useAppSelector(selectCurrentUser);
+
+  const userInfo = {
+    email: user?.email,
+    role: user?.role,
+  };
+  const { data: sales, isLoading } = useGetAllSalesQuery({ filter, userInfo });
   const TABLE_HEAD = [
     "Product Name",
     "Buyer Name",

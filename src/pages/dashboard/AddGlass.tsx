@@ -2,6 +2,8 @@ import { FieldValues, useForm } from "react-hook-form";
 import { useAddEyeGlassMutation } from "../../redux/features/eyeGlass/eyeGlassApi";
 import { toast } from "sonner";
 import { Button, Input } from "@material-tailwind/react";
+import { useAppSelector } from "../../redux/hooks";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 const image_upload_token = import.meta.env.VITE_image_upload_token;
 
 const AddGlass = () => {
@@ -9,6 +11,7 @@ const AddGlass = () => {
 
   const { register, handleSubmit, reset } = useForm();
   const [addGlass] = useAddEyeGlassMutation();
+  const user = useAppSelector(selectCurrentUser);
 
   const onSubmit = (data: FieldValues) => {
     const toastId = toast.loading("Please wait...");
@@ -47,6 +50,7 @@ const AddGlass = () => {
               brand,
               gender,
               color,
+              userEmail: user?.email,
             };
             await addGlass(glassData);
             toast.success("Product added successfully!", {
