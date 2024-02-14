@@ -27,6 +27,7 @@ const SalesHistory = () => {
     "Lens",
     "Color",
     "Sell Quantity",
+    "Download Invoice",
   ];
 
   if (isLoading) {

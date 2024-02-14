@@ -4,7 +4,6 @@ const salesApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllSales: builder.query({
       query: ({ filter, userInfo }) => {
-        console.log(filter);
         const params = new URLSearchParams();
         if (filter) {
           params.append("filterBy", filter);
@@ -15,9 +14,16 @@ const salesApi = baseApi.injectEndpoints({
           params: params,
         };
       },
-      providesTags: ["all-glasses"],
+      providesTags: ["sales"],
+    }),
+    getSale: builder.query({
+      query: (id: string) => ({
+        url: `/sales/get-sale/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["sales"],
     }),
   }),
 });
 
-export const { useGetAllSalesQuery } = salesApi;
+export const { useGetAllSalesQuery, useGetSaleQuery } = salesApi;
