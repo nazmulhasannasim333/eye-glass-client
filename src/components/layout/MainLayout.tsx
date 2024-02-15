@@ -3,14 +3,12 @@ import Sidebar from "./Sidebar";
 
 const MainLayout = () => {
   return (
-    <div>
-      <div className="flex h-screen">
+    <div className="flex">
+      <div className="lg:w-1/5 w-2 z-50 overflow-hidden">
         <Sidebar />
-        <div className="flex-1 p-5">
-          <h1 className="text-2xl font-bold mb-5">
-            <Outlet />
-          </h1>
-        </div>
+      </div>
+      <div className="px-3 py-5 lg:w-4/5 lg:overflow-hidden">
+        <Outlet />
       </div>
     </div>
   );

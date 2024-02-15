@@ -34,9 +34,9 @@ const DashboardHome = () => {
           className="h-full w-full bg-gray-50 relative overflow-y-auto"
         >
           <main>
-            <div className="pt-6 px-8">
+            <div className="pt-6 px-3 lg:px-8">
               <div className="my-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                <div className="bg-gradient-to-r from-cyan-800 to-gray-700 text-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
+                <div className="bg-gradient-to-r from-cyan-800 to-gray-700 text-white shadow rounded-lg p-4 sm:p-2 xl:p-8 ">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
                       <span className="text-2xl sm:text-3xl leading-none font-bold ">
