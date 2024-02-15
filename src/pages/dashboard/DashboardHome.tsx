@@ -17,10 +17,10 @@ const DashboardHome = () => {
   const { data: sales } = useGetAllSalesQuery({
     userInfo,
   });
-  console.log(eyeGlasses);
   const totalSales = sales?.data?.reduce((acc: any, item: any) => {
     return acc + item.quantity * item.productId.productPrice;
   }, 0);
+  const formattedTotalSales = totalSales?.toFixed(2);
 
   return (
     <div className="w-full">
@@ -65,7 +65,7 @@ const DashboardHome = () => {
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
                       <span className="text-2xl sm:text-3xl leading-none font-bold ">
-                        ${totalSales}
+                        ${formattedTotalSales}
                       </span>
                       <h3 className="text-base font-normal ">
                         Total Sales Amount

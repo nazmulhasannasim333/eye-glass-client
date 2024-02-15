@@ -21,7 +21,7 @@ Eye Glass Inventory
 Clone the project
 
 ```bash
-  git clone https://github.com/Porgramming-Hero-web-course/l2b2-full-stack-a5-client-side-nazmulhasannasim333
+  git clone https://github.com/Porgramming-Hero-web-course/l2-b2-assignment-6-fronten-nazmulhasannasim333
 ```
 
 Go to the project directory
