@@ -76,7 +76,8 @@ const SalesCard = ({ sales }: Tprops) => {
                   color="blue-gray"
                   className="font-normal"
                 >
-                  {productId?.productQuantity || (
+                  $
+                  {productId?.productPrice || (
                     <p className="text-red-300">Not Found</p>
                   )}
                 </Typography>

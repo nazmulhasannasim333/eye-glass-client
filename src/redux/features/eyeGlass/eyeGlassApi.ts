@@ -53,7 +53,6 @@ const eyeGlassApi = baseApi.injectEndpoints({
         if (limit) {
           params.append("limit", limit);
         }
-
         return {
           url: `/products/get-all-products/${email}/${role}`,
           method: "GET",

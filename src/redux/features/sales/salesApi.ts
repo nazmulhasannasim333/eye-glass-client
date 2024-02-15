@@ -4,6 +4,7 @@ const salesApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllSales: builder.query({
       query: ({ filter, userInfo }) => {
+        console.log(filter);
         const params = new URLSearchParams();
         if (filter) {
           params.append("filterBy", filter);
