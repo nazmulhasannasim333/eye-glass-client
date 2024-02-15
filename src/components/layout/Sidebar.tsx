@@ -104,7 +104,7 @@ import {
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { FaChartLine, FaEye, FaGlasses, FaPlus } from "react-icons/fa";
+import { FaChartLine, FaEye, FaGlasses, FaHome, FaPlus } from "react-icons/fa";
 import { useAppDispatch } from "../../redux/hooks";
 import { logout } from "../../redux/features/auth/authSlice";
 
@@ -153,6 +153,14 @@ const Sidebar = () => {
           </div>
           <List placeholder="...">
             <List placeholder="..." className="p-0">
+              <NavLink to="/" className="text-white">
+                <ListItem placeholder="...">
+                  <ListItemPrefix placeholder="...">
+                    <FaHome strokeWidth={3} className="h-6 w-6 text-gray-300" />
+                  </ListItemPrefix>
+                  Home
+                </ListItem>
+              </NavLink>
               <NavLink to="/add-product" className="text-white">
                 <ListItem placeholder="...">
                   <ListItemPrefix placeholder="...">
@@ -242,38 +250,42 @@ const Sidebar = () => {
             />
           </div>
           <List placeholder="...">
-            <ListItemPrefix placeholder="...">
-              <FaGlasses className="h-6 w-6 text-gray-300" />
-            </ListItemPrefix>
-
             <List placeholder="..." className="p-0">
-              <ListItem placeholder="...">
-                <ListItemPrefix placeholder="...">
-                  <FaPlus strokeWidth={3} className="h-6 w-6 text-gray-300" />
-                </ListItemPrefix>
-                <NavLink to="/add-product" className="text-white">
+              <NavLink to="/" className="text-white">
+                <ListItem placeholder="...">
+                  <ListItemPrefix placeholder="...">
+                    <FaHome strokeWidth={3} className="h-6 w-6 text-gray-300" />
+                  </ListItemPrefix>
+                  Home
+                </ListItem>
+              </NavLink>
+              <NavLink to="/add-product" className="text-white">
+                <ListItem placeholder="...">
+                  <ListItemPrefix placeholder="...">
+                    <FaPlus strokeWidth={3} className="h-6 w-6 text-gray-300" />
+                  </ListItemPrefix>
                   Add Glass
-                </NavLink>
-              </ListItem>
-              <ListItem placeholder="...">
-                <ListItemPrefix placeholder="...">
-                  <FaEye strokeWidth={3} className="h-6 w-6 text-gray-300" />
-                </ListItemPrefix>
-                <NavLink to="/all-products" className="text-white">
+                </ListItem>
+              </NavLink>
+              <NavLink to="/all-products" className="text-white">
+                <ListItem placeholder="...">
+                  <ListItemPrefix placeholder="...">
+                    <FaEye strokeWidth={3} className="h-6 w-6 text-gray-300" />
+                  </ListItemPrefix>
                   Eye Glasses
-                </NavLink>
-              </ListItem>
-              <ListItem placeholder="...">
-                <ListItemPrefix placeholder="...">
-                  <FaChartLine
-                    strokeWidth={3}
-                    className="h-6 w-6 text-gray-300"
-                  />
-                </ListItemPrefix>
-                <NavLink to="/sales-history" className="text-white">
+                </ListItem>
+              </NavLink>
+              <NavLink to="/sales-history" className="text-white">
+                <ListItem placeholder="...">
+                  <ListItemPrefix placeholder="...">
+                    <FaChartLine
+                      strokeWidth={3}
+                      className="h-6 w-6 text-gray-300"
+                    />
+                  </ListItemPrefix>
                   Sales History
-                </NavLink>
-              </ListItem>
+                </ListItem>
+              </NavLink>
             </List>
 
             <hr className="my-2 border-gray-300" />
@@ -282,6 +294,7 @@ const Sidebar = () => {
               <ListItemPrefix placeholder="...">
                 <PowerIcon className="h-5 w-5 text-gray-300" />
               </ListItemPrefix>
+
               <Link to="/login" className="text-white">
                 Log Out
               </Link>
