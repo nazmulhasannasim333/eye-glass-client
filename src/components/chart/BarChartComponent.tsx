@@ -52,9 +52,12 @@ const BarChartComponent = () => {
   const brandData: BrandData[] = Array.from(brandDataMap.values());
   console.log(brandData);
 
+  const screenWidth = window.innerWidth;
+  const chartWidth = screenWidth <= 768 ? 320 : 500;
+
   return (
     <div>
-      <BarChart width={500} height={400} data={brandData} barSize={20}>
+      <BarChart width={chartWidth} height={400} data={brandData} barSize={20}>
         <XAxis
           dataKey="brand"
           scale="point"

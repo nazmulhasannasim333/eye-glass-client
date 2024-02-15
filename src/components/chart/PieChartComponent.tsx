@@ -56,8 +56,11 @@ const PieChartComponent = () => {
     value: groupedData[brand],
   }));
 
+  const screenWidth = window.innerWidth;
+  const chartWidth = screenWidth <= 768 ? 320 : 500;
+
   return (
-    <PieChart className="ms-10" width={400} height={400}>
+    <PieChart className="lg:ms-10 ms-0" width={chartWidth} height={400}>
       <Pie
         data={data}
         cx="50%"
