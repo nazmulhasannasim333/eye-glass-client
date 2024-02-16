@@ -23,7 +23,7 @@ const BarChartComponent = () => {
     email: user?.email,
     role: user?.role,
   };
-  const { data: sales } = useGetAllSalesQuery({
+  const { data: sales, isFetching: SIsFetching } = useGetAllSalesQuery({
     userInfo,
   });
 
@@ -31,9 +31,9 @@ const BarChartComponent = () => {
 
   // Calculate total quantity and total sales price for each brand
   sales?.data?.forEach((transaction: any) => {
-    const brand = transaction.productId.brand;
-    const quantity = transaction.quantity;
-    const salesPrice = transaction.productId.productPrice * quantity;
+    const brand = transaction?.productId?.brand;
+    const quantity = transaction?.quantity;
+    const salesPrice = transaction?.productId.productPrice * quantity;
 
     if (!brandDataMap.has(brand)) {
       brandDataMap.set(brand, {
@@ -54,6 +54,14 @@ const BarChartComponent = () => {
 
   const screenWidth = window.innerWidth;
   const chartWidth = screenWidth <= 768 ? 320 : 500;
+
+  if (SIsFetching) {
+    return (
+      <>
+        <h1>Loading</h1>
+      </>
+    );
+  }
 
   return (
     <div>
