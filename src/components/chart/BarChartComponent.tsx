@@ -11,6 +11,7 @@ import {
 import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 import { useGetAllSalesQuery } from "../../redux/features/sales/salesApi";
 import { useAppSelector } from "../../redux/hooks";
+import { CardHeader } from "@material-tailwind/react";
 interface BrandData {
   brand: string;
   totalQuantity: number;
@@ -32,20 +33,22 @@ const BarChartComponent = () => {
   // Calculate total quantity and total sales price for each brand
   sales?.data?.forEach((transaction: any) => {
     const brand = transaction?.productId?.brand;
-    const quantity = transaction?.quantity;
-    const salesPrice = transaction?.productId?.productPrice * quantity;
+    if (brand) {
+      const quantity = transaction?.quantity;
+      const salesPrice = transaction?.productId?.productPrice * quantity;
 
-    if (!brandDataMap.has(brand)) {
-      brandDataMap.set(brand, {
-        brand: brand,
-        totalQuantity: quantity,
-        totalSalesPrice: salesPrice,
-      });
-    } else {
-      const existingBrandData = brandDataMap.get(brand)!;
-      existingBrandData.totalQuantity += quantity;
-      existingBrandData.totalSalesPrice += salesPrice;
-      brandDataMap.set(brand, existingBrandData);
+      if (!brandDataMap.has(brand)) {
+        brandDataMap.set(brand, {
+          brand: brand,
+          totalQuantity: quantity,
+          totalSalesPrice: salesPrice,
+        });
+      } else {
+        const existingBrandData = brandDataMap.get(brand)!;
+        existingBrandData.totalQuantity += quantity;
+        existingBrandData.totalSalesPrice += salesPrice;
+        brandDataMap.set(brand, existingBrandData);
+      }
     }
   });
 
@@ -58,7 +61,27 @@ const BarChartComponent = () => {
   if (SIsFetching) {
     return (
       <>
-        <h1>Loading</h1>
+        <CardHeader
+          placeholder={""}
+          shadow={false}
+          floated={false}
+          className="relative grid h-56 place-items-center bg-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2}
+            stroke="currentColor"
+            className="h-12 w-12 text-gray-500"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+            />
+          </svg>
+        </CardHeader>
       </>
     );
   }

@@ -51,7 +51,7 @@ const SalesCard = ({ sales }: Tprops) => {
                       className="font-normal text-[12px]"
                     >
                       {productId?.productName || (
-                        <p className="text-red-300">"Sold Out"</p>
+                        <h2 className="text-red-300 text-[15px]">Sold Out</h2>
                       )}
                     </Typography>
                   </div>
