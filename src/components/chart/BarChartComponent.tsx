@@ -33,7 +33,7 @@ const BarChartComponent = () => {
   sales?.data?.forEach((transaction: any) => {
     const brand = transaction?.productId?.brand;
     const quantity = transaction?.quantity;
-    const salesPrice = transaction?.productId.productPrice * quantity;
+    const salesPrice = transaction?.productId?.productPrice * quantity;
 
     if (!brandDataMap.has(brand)) {
       brandDataMap.set(brand, {
