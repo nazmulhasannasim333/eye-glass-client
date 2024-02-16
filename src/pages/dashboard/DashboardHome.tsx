@@ -18,7 +18,7 @@ const DashboardHome = () => {
     userInfo,
   });
   const totalSales = sales?.data?.reduce((acc: any, item: any) => {
-    return acc + item.quantity * item.productId.productPrice;
+    return acc + item?.quantity * item?.productId?.productPrice;
   }, 0);
   const formattedTotalSales = totalSales?.toFixed(2);
 
