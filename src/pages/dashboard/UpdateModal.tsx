@@ -13,6 +13,8 @@ import {
   useUpdateEyeGlassMutation,
 } from "../../redux/features/eyeGlass/eyeGlassApi";
 import { toast } from "sonner";
+import { useAppSelector } from "../../redux/hooks";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 const image_upload_token = import.meta.env.VITE_image_upload_token;
 
 const UpdateModal = ({ id }: { id: string }) => {
@@ -22,6 +24,7 @@ const UpdateModal = ({ id }: { id: string }) => {
   const image_upload_url = `https://api.imgbb.com/1/upload?key=${image_upload_token}`;
   const [updateGlass] = useUpdateEyeGlassMutation();
   const handleOpen = () => setOpen(!open);
+  const user = useAppSelector(selectCurrentUser);
 
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Please wait...");
@@ -61,6 +64,7 @@ const UpdateModal = ({ id }: { id: string }) => {
                 brand,
                 gender,
                 color,
+                userEmail: user?.email,
               };
               await updateGlass({ productData, id });
               toast.success("Product update successfully!", {
@@ -94,6 +98,7 @@ const UpdateModal = ({ id }: { id: string }) => {
           brand,
           gender,
           color,
+          userEmail: user?.email,
         };
         await updateGlass({ productData, id });
         toast.success("Product update successfully!", {
