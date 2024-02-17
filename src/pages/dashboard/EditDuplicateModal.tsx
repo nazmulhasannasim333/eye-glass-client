@@ -13,6 +13,8 @@ import {
   useGetEyeGlassQuery,
 } from "../../redux/features/eyeGlass/eyeGlassApi";
 import { toast } from "sonner";
+import { useAppSelector } from "../../redux/hooks";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 const image_upload_token = import.meta.env.VITE_image_upload_token;
 
 const EditDuplicateModal = ({ id }: { id: string }) => {
@@ -22,6 +24,7 @@ const EditDuplicateModal = ({ id }: { id: string }) => {
   const image_upload_url = `https://api.imgbb.com/1/upload?key=${image_upload_token}`;
   const [addGlass] = useAddEyeGlassMutation();
   const handleOpen = () => setOpen(!open);
+  const user = useAppSelector(selectCurrentUser);
 
   const onSubmit = (data: FieldValues) => {
     const toastId = toast.loading("Please wait...");
@@ -60,6 +63,7 @@ const EditDuplicateModal = ({ id }: { id: string }) => {
               brand,
               gender,
               color,
+              userEmail: user?.email,
             };
             await addGlass(glassData);
             toast.success("Product duplicate successfully!", {
